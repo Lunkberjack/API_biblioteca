@@ -5,11 +5,9 @@ import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
 
 @Serializable
-data class Libro(
+data class Usuario(
     @BsonId
     var id: String = ObjectId().toString(),
-    val titulo: String,
-    val autor: String,
-    val sinopsis: String,
-    val genero: String,
+    val nombre: String,
+    val email: String
 )
