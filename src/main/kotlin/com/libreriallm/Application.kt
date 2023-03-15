@@ -27,17 +27,17 @@ val applicationHttpClient = HttpClient(CIO) {
 }
 
     fun Application.main(httpClient: HttpClient = applicationHttpClient) {
-        install(Sessions) {
-            cookie<UserSession>("user_session")
-        }
-
         configureRouting()
         configureMonitoring()
         configureSerialization()
 
+        install(Sessions) {
+            cookie<UserSession>("user_session")
+        }
+
         val redirects = mutableMapOf<String, String>()
         install(Authentication) {
-            oauth("auth-oauth-google") {
+            oauth("API_biblioteca") {
                 urlProvider = { "http://localhost:8080/callback" }
                 providerLookup = {
                     OAuthServerSettings.OAuth2ServerSettings(
@@ -58,7 +58,7 @@ val applicationHttpClient = HttpClient(CIO) {
             }
         }
         routing {
-            authenticate("auth-oauth-google") {
+            authenticate("API_biblioteca") {
                 get("/login") {
                     // Redirects to 'authorizeUrl' automatically
                 }
