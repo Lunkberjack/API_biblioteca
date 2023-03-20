@@ -13,15 +13,20 @@ version = "0.0.1"
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
 
-    val isDevelopment: Boolean = project.ext.has("development")
+    val isDevelopment: Boolean = true
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://kotlin.bintray.com/ktor")  }
+    maven { url = uri("https://repo1.maven.org/maven2/") }
 }
 
 dependencies {
+    implementation("io.ktor:ktor-server-auth:$ktor_version")
+    implementation("io.ktor:ktor-server-core:$ktor_version")
+
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-host-common-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
@@ -34,7 +39,6 @@ dependencies {
     implementation("org.litote.kmongo:kmongo:4.5.1")
     implementation("org.litote.kmongo:kmongo-coroutine:4.5.1")
 
-    implementation("io.ktor:ktor-server-auth:$ktor_version")
     implementation("io.ktor:ktor-server-sessions:$ktor_version")
     implementation("io.ktor:ktor-server-html-builder:$ktor_version")
     implementation("io.ktor:ktor-client-core:$ktor_version")
